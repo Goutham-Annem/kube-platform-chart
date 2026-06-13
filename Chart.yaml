@@ -1,0 +1,39 @@
+apiVersion: v2
+name: kube-platform
+description: |
+  Bootstrap a production-grade Kubernetes platform on EKS.
+  Installs cert-manager, external-dns, karpenter, metrics-server,
+  and cluster-autoscaler as a single umbrella chart.
+type: application
+version: 0.1.0
+appVersion: "1.0"
+keywords:
+  - kubernetes
+  - eks
+  - platform
+  - cert-manager
+  - karpenter
+  - external-dns
+home: https://github.com/goutham-annem/kube-platform-chart
+sources:
+  - https://github.com/goutham-annem/kube-platform-chart
+maintainers:
+  - name: Goutham Annem
+    url: https://linkedin.com/in/goutham-annem
+dependencies:
+  - name: cert-manager
+    version: "1.14.*"
+    repository: https://charts.jetstack.io
+    condition: cert-manager.enabled
+  - name: external-dns
+    version: "1.14.*"
+    repository: https://kubernetes-sigs.github.io/external-dns/
+    condition: external-dns.enabled
+  - name: karpenter
+    version: "0.37.*"
+    repository: oci://public.ecr.aws/karpenter
+    condition: karpenter.enabled
+  - name: metrics-server
+    version: "3.12.*"
+    repository: https://kubernetes-sigs.github.io/metrics-server/
+    condition: metrics-server.enabled
